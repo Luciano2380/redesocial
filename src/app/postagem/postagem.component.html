@@ -1,0 +1,111 @@
+<div class="container mt-4">
+    <span class="titulo">Postagem</span>
+    <hr class="mb-4">
+
+    <div class="row">
+        <form>
+            <div class="col-lg-8 col-md-6 col-sm-12">
+                <button class="btn btn-success ml-2" data-toggle="modal" data-target="#modalPost">Postar</button>
+                <br><br>
+            </div>
+        </form>
+    </div>
+<table class="table table-striped ml-2">
+    <tr>
+        <td><b>Postagem</b></td>
+        <td><b>Imagem</b></td>
+        <td><b>Comentários</b></td>
+        <td><b>Ações</b></td>
+    </tr>
+    <tr *ngFor="let dado of lista">
+
+        <td>{{dado.nome}}</td>
+        <td>{{dado.linkFoto}}</td>
+        <td>
+            <table>
+                <tr>
+                    <td><b>Comentário</b></td>
+                    <td><b>Ação</b></td>
+                </tr>
+                <tr *ngFor="let cm of dado.comentarios ">
+                    <td>{{dado.textoComentario}}</td>
+                    <td>
+                        <a (click)="excluirComentario(cm.id)" title="Excluir Comentario"><i class="far fa-trash-alt text-danger"></i></a>
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+        <td>
+            <a (click)="excluir(dado.id)" title="Excluir Postagem"><i class="far fa-trash-alt text-danger"></i></a>
+            <button class="btn btn-success ml-2" data-toggle="modal" data-target="#modalComentario">Comentar</button>
+        </td>
+    </tr>
+</table>
+
+</div>
+
+
+
+<!--CONTEUDO DA JANELA MODAL POSTAR -->
+<div id="modal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Inserir Postagem</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="texto">Post</label>
+                    <input type="text" class="form-control" (input)="$event.target.value" aria-describedby="texto"
+                        placeholder="O que está pensando" required />
+                </div>
+                <div class="form-group">
+                    <label for="foto">Inserir Imagem</label>
+                    <input type="file" class="form-control-file" (change)="upload($event)" id="foto"
+                        aria-describedby="foto" placeholder="Imagem" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="cadastrar()">Salvar</button>
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--CONTEUDO DA JANELA MODAL Comentar-->
+<div id="modal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Inserir Comentario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="coment">Post</label>
+                    <input type="coment" class="form-control" (input)="$event.target.value" aria-describedby="coment"
+                        placeholder="Comentar a publicação" required />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="cadastrarComentario()">Salvar</button>
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+
+        </div>
+    </div>
+</div>

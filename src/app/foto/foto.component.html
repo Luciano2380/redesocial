@@ -1,0 +1,64 @@
+<div class="container mt-4">
+    <span class="titulo">Fotos</span>
+    <hr class="mb-4">
+    
+    <div class="row">
+        <form>
+      <div class="col-lg-8 col-md-6 col-sm-12">
+        <button class="btn btn-success ml-2" data-toggle="modal" data-target="#modal">Adicionar</button>
+        <br><br>
+      </div>      
+      </form>
+      </div>
+    
+   
+    
+    <table class="table table-striped ml-2">
+      <tr>
+          <td><b>Fotos</b></td>         
+          <td><b>Ações</b></td>
+      </tr>
+    <tr *ngFor="let dado of lista">
+    
+      <td>{{dado.nome}}</td>     
+      <td>         
+          <a (click)="excluir(dado.id)" title="Excluir Registro"><i class="far fa-trash-alt text-danger"></i></a>
+      </td>
+    </tr>
+    </table>
+    
+    </div>
+
+
+    
+<!--CONTEUDO DA JANELA MODAL DE INSERIR E EDITAR -->
+<div id="modal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{title}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+            <div class="form-group">                 
+                <label for="foto">Inserir Imagem</label>
+                 <input type="file" class="form-control-file" id="foto"
+                 aria-describedby="foto" placeholder="Imagem" required >
+              </div> 
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="cadastrar()">Salvar</button>           
+
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
