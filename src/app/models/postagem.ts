@@ -7,5 +7,5 @@ export class Postagem{
     usuario?:Usuario;
     textoPostagem: string;
     comentarios?: Comentario[];
-    fotos:Foto[];
+    linkFoto:string;
 }

@@ -14,14 +14,14 @@ export class PostagemService {
 
   salvar(post:Postagem){
     const postagem = AppUtils.jsonString(post);
-    return this.http.post(`${AppConstantes.API}/postagens`,postagem, AppUtils.header()).map(res => res);
+    return this.http.post<Postagem>(`${AppConstantes.API}/postagens`,postagem, AppUtils.header()).map(res => res);
   }
 
   excluir(id:number){   
-    return this.http.delete(`${AppConstantes.API}/postagens/${id}`,{responseType:'text'});
+    return this.http.delete(`${AppConstantes.API}/postagens/${id}`,AppUtils.header()).map(res => res);
   }
 
   listar(){  
-    return this.http.get(`${AppConstantes.API}\postagens`,AppUtils.header()).map(res => res);
+    return this.http.get<Postagem[]>(`${AppConstantes.API}/postagens`,AppUtils.header()).map(res => res);
   }
 }

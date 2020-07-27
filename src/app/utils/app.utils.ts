@@ -1,3 +1,5 @@
+import { AppConstantes } from './app.constantes';
+
 export class AppUtils{
     constructor() { }
 
@@ -26,7 +28,32 @@ export class AppUtils{
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "POST, GET, OPTIONS, PUT",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Authorization": localStorage.getItem(AppConstantes.TOKEN)
+            
+          }
+        };
+        return header;
+      }
+
+      static headerUser() {
+        var header = {
+          "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, GET, OPTIONS, PUT",
+            "Accept": "application/json"        
+            
+          }
+        };
+        return header;
+      }
+
+      static header2() {
+        var header = {
+          "headers": {
+            "Authorization": localStorage.getItem(AppConstantes.TOKEN)
+            
           }
         };
         return header;

@@ -19,15 +19,15 @@ export class FotoService {
   }
 
   excluir(id:number){   
-    return this.http.delete(`${AppConstantes.API}/fotos/${id}`,{responseType:'text'});
+    return this.http.delete(`${AppConstantes.API}/fotos/${id}`,AppUtils.header()).map(res => res);
   }
 
   listar(){  
     return this.http.get<Foto[]>(`${AppConstantes.API}/fotos`,AppUtils.header()).map(res => res);
   }
 
-  upload(img:any){    
-    return this.http.post<any>(`${AppConstantes.API}/fotos/imagem`,img, AppUtils.header()).map(res => res);
+  upload(img:FormData){     
+    return this.http.post<any>(`${AppConstantes.API}/fotos/imagem`,img,AppUtils.header2()).map(res => res);
   }
 
 }

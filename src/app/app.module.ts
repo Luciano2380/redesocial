@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { PostagemComponent } from './postagem/postagem.component';
 import { FotoComponent } from './foto/foto.component';
-import { MenuComponent } from './menu/menu.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FotoService } from './services/foto.service';
 import { UsuarioService } from './services/usuario.service';
@@ -18,7 +17,7 @@ import { ComentarioService } from './services/comentario.service';
     AppComponent,
     LoginComponent,
     PostagemComponent, 
-    FotoComponent, MenuComponent
+    FotoComponent
   ],
   imports: [
     BrowserModule,

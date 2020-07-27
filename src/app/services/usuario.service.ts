@@ -15,13 +15,14 @@ export class UsuarioService {
 
   salvar(user:Usuario){
     const usuario = AppUtils.jsonString(user);
-    return this.http.post(`${AppConstantes.API}/usuarios`,usuario, AppUtils.header()).map(res => res);
+    return this.http.post(`${AppConstantes.API}/usuarios`,usuario, AppUtils.headerUser()).map(res => res);
   }
 
 
   login(login:string,senha:string){
     const usuario = AppUtils.jsonString({login:login,senha:senha});
-    return this.http.post<any>(`${AppConstantes.API}/usuarios/login`,usuario).map(res =>{
+    return this.http.post<any>(`${AppConstantes.API}/login`,usuario,AppUtils.headerUser()).map(res =>{
+      console.log(res.token);
       localStorage.setItem(AppConstantes.TOKEN, res.token);
     });
   }

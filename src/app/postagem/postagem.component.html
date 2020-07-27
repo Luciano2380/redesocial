@@ -1,14 +1,18 @@
-<div class="container mt-4">
-    <span class="titulo">Postagem</span>
+<div class="container  mt-4">
+    <span class="titulo"><b>Postagem</b></span>
     <hr class="mb-4">
 
-    <div class="row">
-        <form>
+    <div class="row">        
             <div class="col-lg-8 col-md-6 col-sm-12">
                 <button class="btn btn-success ml-2" data-toggle="modal" data-target="#modalPost">Postar</button>
                 <br><br>
+            </div> 
+            <div class="row">     
+            <div class="col-lg-8 col-md-6 col-sm-12">
+                <button type="button" class="btn btn-primary" (click)="verAlbum()">Ver Album</button>
+                <br><br>
             </div>
-        </form>
+            </div>    
     </div>
 <table class="table table-striped ml-2">
     <tr>
@@ -19,16 +23,16 @@
     </tr>
     <tr *ngFor="let dado of lista">
 
-        <td>{{dado.nome}}</td>
-        <td>{{dado.linkFoto}}</td>
+        <td>{{dado.textoPostagem}}</td> 
+      <td><img src="dado.foto.linkFoto}" alt="Girl in a jacket" width="50" height="60"></td> 
         <td>
-            <table>
+            <table class="table">
                 <tr>
                     <td><b>Comentário</b></td>
                     <td><b>Ação</b></td>
                 </tr>
                 <tr *ngFor="let cm of dado.comentarios ">
-                    <td>{{dado.textoComentario}}</td>
+                    <td>{{cm.textoComentario}}</td>
                     <td>
                         <a (click)="excluirComentario(cm.id)" title="Excluir Comentario"><i class="far fa-trash-alt text-danger"></i></a>
                     </td>
@@ -37,8 +41,12 @@
 
         </td>
         <td>
-            <a (click)="excluir(dado.id)" title="Excluir Postagem"><i class="far fa-trash-alt text-danger"></i></a>
-            <button class="btn btn-success ml-2" data-toggle="modal" data-target="#modalComentario">Comentar</button>
+            <a (click)="excluirPostagem(dado.id)" title="Excluir Postagem"><i class="far fa-trash-alt text-danger"></i></a>
+            <div class="form-group">
+                <textarea type="coment" class="form-control" (input)="this.textoComentario = $event.target.value" aria-describedby="coment"
+                        placeholder="Comentar a publicação" required ></textarea>
+                 <button type="button" class="btn btn-primary" (click)="cadastrarComentario(dado)">Comentar</button>
+              </div>
         </td>
     </tr>
 </table>
@@ -48,11 +56,11 @@
 
 
 <!--CONTEUDO DA JANELA MODAL POSTAR -->
-<div id="modal" class="modal fade" role="dialog">
+<div id="modalPost" class="modal fade" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Inserir Postagem</h5>
+                <h5 class="modal-title">Postagem</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -62,8 +70,8 @@
 
                 <div class="form-group">
                     <label for="texto">Post</label>
-                    <input type="text" class="form-control" (input)="$event.target.value" aria-describedby="texto"
-                        placeholder="O que está pensando" required />
+                    <textarea class="form-control" rows="5" (input)="this.textoPostagem = $event.target.value" aria-describedby="texto"
+                        placeholder="O que está pensando" required ></textarea>
                 </div>
                 <div class="form-group">
                     <label for="foto">Inserir Imagem</label>
@@ -72,7 +80,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" (click)="cadastrar()">Salvar</button>
+                <button type="button" class="btn btn-primary" (click)="cadastrarPostagem()">Publicar</button>
 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
             </div>
@@ -81,31 +89,3 @@
     </div>
 </div>
 
-<!--CONTEUDO DA JANELA MODAL Comentar-->
-<div id="modal" class="modal fade" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Inserir Comentario</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-
-                <div class="form-group">
-                    <label for="coment">Post</label>
-                    <input type="coment" class="form-control" (input)="$event.target.value" aria-describedby="coment"
-                        placeholder="Comentar a publicação" required />
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" (click)="cadastrarComentario()">Salvar</button>
-
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            </div>
-
-        </div>
-    </div>
-</div>

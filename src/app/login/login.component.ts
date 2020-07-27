@@ -11,53 +11,52 @@ import { Usuario } from '../models/usuario';
 export class LoginComponent implements OnInit {
 
   nome = '';
-  usuario = '';
+  login = '';
   senha = '';
+  password='';
+  usuario='';
+
+
 
   constructor(private service:UsuarioService, private router:Router) { }
 
   ngOnInit():void {
   }
 
-  login(login:string, senha:string) {
+  logar(login:string, senha:string) {
     
     return new Promise(resolve => {
      
       this.service.login(login,senha)
-      .subscribe(data => {
-
-        if(data['success']){
-          
-            this.router.navigate(['/menus']);
-        }else{
-          alert('Dados Incorretos!!');
-        }
-
+      .subscribe(data => { 
+        console.log('PASSOU AQUI');             
+           this.router.navigate(['/postagens']);         
+        },(error:Error)=>{
+          console.log(error);
+        alert('Dados Incorretos!!');
       });
+   
     });
   }
 
   cadastrar() {
-    if(this.nome !== '' && this.usuario !== '' && this.senha !== '') {
+    if(this.nome !== '' && this.usuario !== '' && this.password !== '') {
     return new Promise(resolve => {
       const dados:Usuario = {               
         nome: this.nome,
         login: this.usuario,
-        senha: this.senha
+        senha: this.password
       };
       this.service.salvar(dados)
-      .subscribe(data => {
-        if(data){
-          alert('Salvo com sucesso!!');
-          window.location.reload();         
-        }else{
-          alert('Erro ao Salvar!!');
-        }
-
+      .subscribe(data => {        
+          window.location.reload(); 
       },(error:Error)=>{
-        alert('Prencha os Campos!');
+        console.log(error);
+        alert('Erro ao Salvar!!');
       });
     });
+  } else{
+    alert('Preencha os campos!');
   }
 }
 
